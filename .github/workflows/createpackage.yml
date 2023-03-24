@@ -1,6 +1,6 @@
 name: Create Unity Package
 
-on: workflow_dispatch
+on: push
 
 jobs:
   echo:
@@ -14,6 +14,7 @@ jobs:
     - run: mkdir a
     - run: cat metaList
     - run: ls -la
+    - run: cd Assets/ && ls -la
 
     - uses: pCYSl5EDgo/create-unitypackage@v1.1.1
       with:
