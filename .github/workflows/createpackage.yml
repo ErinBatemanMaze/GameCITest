@@ -8,8 +8,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: |
-        echo "Assets.meta" > metaList
-        find Assets/ -name \*.meta >> metaList
+        find Assets/ -name \*.meta > metaList
 
     - run: mkdir a
     - run: cat metaList
