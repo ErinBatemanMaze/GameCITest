@@ -12,6 +12,7 @@ jobs:
         find Assets/ -name \*.meta >> metaList
 
     - run: mkdir a
+    - run: cat metaList
 
     - uses: pCYSl5EDgo/create-unitypackage@v1.1.1
       with:
