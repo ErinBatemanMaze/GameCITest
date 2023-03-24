@@ -13,6 +13,7 @@ jobs:
 
     - run: mkdir a
     - run: cat metaList
+    - run: ls -la
 
     - uses: pCYSl5EDgo/create-unitypackage@v1.1.1
       with:
