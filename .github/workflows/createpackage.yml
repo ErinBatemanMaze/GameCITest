@@ -1,6 +1,6 @@
 name: Create Unity Package
 
-on: push
+on: workflow_dispatch
 
 jobs:
   echo:
@@ -8,8 +8,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: |
-        echo "Assets/Voiceer.meta" > metaList
-        find Assets/Voiceer/ -name \*.meta >> metaList
+        echo "Assets.meta" > metaList
+        find Assets/ -name \*.meta >> metaList
 
     - run: mkdir a
 
