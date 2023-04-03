@@ -1,0 +1,16 @@
+name: Unity Script Build
+on:
+  workflow_dispatch
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    - name: Install Unity
+      uses: game-ci/unity-builder@v1.1.1
+      with:
+        version: 2020.3.32f1
+    - name: Build Unity project
+      run: unity -batchmode -nographics -logFile build.log -projectPath ./GameCITest -executeMethod BuildScript.PerformScriptOnlyBuild
