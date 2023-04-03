@@ -1,6 +1,6 @@
 name: Create Unity Package
 
-on: push
+on: workflow_dispatch
 
 jobs:
   echo:
