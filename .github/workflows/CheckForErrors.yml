@@ -1,0 +1,36 @@
+name: CheckForErrors
+
+on:
+  pull_request:
+    branches: [ master ]
+    types: [ closed ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Set up Unity and activate Unity license
+      - name: Set up Unity
+        uses: game-ci/setup-unity@v1
+        with:
+          unity-version: 2020.3.32f1
+
+      # Build the project using the Unity command line interface
+      - name: Build Unity project
+        run: unity -batchmode -nographics -silent-crashes -quit -projectPath ./GameCITest -executeMethod MyEditorScript.PerformBuild
+
+      # Check for script errors and fail the job if any are found
+      - name: Check for script errors
+        run: |
+          find ./GameCITest/Logs -name '*.log' -exec grep -H 'error CS' {} \; && exit 1 || exit 0
+
+      # If any step failed, prevent the branch from being merged and show an error message.
+      # This step only runs if any previous step failed.
+      - name: Block merge
+        if: ${{ github.event.pull_request.merged == true && job.status != 'success' }}
+        run: |
+          echo "Error: Build or test steps failed. Pull request cannot be merged ❌"
