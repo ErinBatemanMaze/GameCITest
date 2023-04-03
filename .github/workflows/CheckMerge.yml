@@ -21,12 +21,12 @@ jobs:
 
       # Build the project using the Unity command line interface
       - name: Build Unity project
-        run: unity -batchmode -nographics -silent-crashes -quit -projectPath ./MyProject -executeMethod MyEditorScript.PerformBuild
+        run: unity -batchmode -nographics -silent-crashes -quit -projectPath ./GameCITest -executeMethod MyEditorScript.PerformBuild
 
       # Check for script errors and fail the job if any are found
       - name: Check for script errors
         run: |
-          find ./MyProject/Logs -name '*.log' -exec grep -H 'error CS' {} \; && exit 1 || exit 0
+          find ./GameCITest/Logs -name '*.log' -exec grep -H 'error CS' {} \; && exit 1 || exit 0
 
       # If any step failed, prevent the branch from being merged and show an error message.
       # This step only runs if any previous step failed.
