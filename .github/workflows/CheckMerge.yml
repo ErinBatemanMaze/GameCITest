@@ -1,6 +1,9 @@
 name: CheckMerge
 
 on:
+  push:
+    branches:
+      - master
   pull_request:
     branches:
       - master
@@ -16,17 +19,17 @@ jobs:
     - run: |
           echo building...
           
-  if_notMerged:
-      if: github.event.pull_request.merged == false
-      runs-on: ubuntu-latest
-      steps:
-      - run: |
-          echo The PR was not merged
-          
   if_merged:
       needs: buildAndroid
       if: github.event.pull_request.merged == true
       runs-on: ubuntu-latest
       steps:
       - run: |
-          echo The PR was merged
+          echo All checks are fine. The PR can be merged ✅
+          
+  if_notMerged:
+      if: github.event.pull_request.merged == false
+      runs-on: ubuntu-latest
+      steps:
+      - run: |
+          echo There were errors in the build, PR should NOT be merged ❌
