@@ -12,7 +12,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
     - name: Install Unity
-      uses: webbertakken/unity-builder@v1.16.0
+      uses: game-ci/unity-builder@v2
       with:
         version: 2020.3.32f1
     - name: Build Unity project
