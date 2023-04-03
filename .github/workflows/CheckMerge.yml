@@ -1,34 +1,36 @@
 name: CheckMerge
 
 on:
-  push:
-    branches:
-      - master
   pull_request:
-    branches:
-      - master
-    types: 
-      - ready_for_review
-      - review_requested
+    branches: [ master ]
+    types: [ closed ]
 
 jobs:
-
-  buildAndroid:
+  build:
     runs-on: ubuntu-latest
     steps:
-    - run: |
-          echo building...
-          
-  if_merged:
-      needs: buildAndroid
-      runs-on: ubuntu-latest
-      steps:
-      - run: |
-          echo All checks are fine. The PR can be merged ✅
-          
-  if_notMerged:
-      if: github.event.pull_request.merged == false
-      runs-on: ubuntu-latest
-      steps:
-      - run: |
-          echo There were errors in the build, PR should NOT be merged ❌
+      # Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Set up Unity and activate Unity license
+      - name: Set up Unity
+        uses: game-ci/setup-unity@v1
+        with:
+          unity-version: 2020.3.32f1
+
+      # Build the project using the Unity command line interface
+      - name: Build Unity project
+        run: unity -batchmode -nographics -silent-crashes -quit -projectPath ./MyProject -executeMethod MyEditorScript.PerformBuild
+
+      # Check for script errors and fail the job if any are found
+      - name: Check for script errors
+        run: |
+          find ./MyProject/Logs -name '*.log' -exec grep -H 'error CS' {} \; && exit 1 || exit 0
+
+      # If any step failed, prevent the branch from being merged and show an error message.
+      # This step only runs if any previous step failed.
+      - name: Block merge
+        if: ${{ github.event.pull_request.merged == true && job.status != 'success' }}
+        run: |
+          echo "Error: Build or test steps failed. Pull request cannot be merged ❌"
