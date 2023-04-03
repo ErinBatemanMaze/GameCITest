@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - run: |
-          building...
+          echo building...
           
   if_notMerged:
       if: github.event.pull_request.merged == false
