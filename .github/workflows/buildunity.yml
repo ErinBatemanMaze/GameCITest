@@ -40,4 +40,4 @@ jobs:
       with:
         version: 2020.3.32f1
     - name: Build Unity project
-      run: unity -batchmode -nographics -logFile build.log -projectPath ./GameCITest -executeMethod BuildScript.PerformScriptOnlyBuild
+      run: unity -batchmode -nographics -logFile build.log -projectPath ${{ github.workspace }}/GameCITest -executeMethod BuildScript.PerformScriptOnlyBuild
