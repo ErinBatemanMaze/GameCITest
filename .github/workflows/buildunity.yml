@@ -28,18 +28,25 @@ jobs:
         git lfs pull
         git add .
         git reset --hard
+        
     - name: Restore Library cache
       uses: actions/cache@v2
       with:
         path: Library
-        key: Library-build-Android
+        key: Library-GameCITest-Android
         restore-keys: |
           Library-build-
           Library-
           
-    - name: Install Unity
+    - name: Build Unity
       uses: game-ci/unity-builder@v2
       with:
         version: 2020.3.32f1
-    - name: Build Unity project
-      run: unity -batchmode -nographics -logFile build.log -projectPath ${{ github.workspace }}/GameCITest -executeMethod BuildScript.PerformScriptOnlyBuild
+        targetPlatform: Android
+        buildMethod: BuildScript.PerformScriptOnlyBuild
+        
+    - uses: actions/upload-artifact@v2
+      with:
+        name: Build
+        path: build
+        
