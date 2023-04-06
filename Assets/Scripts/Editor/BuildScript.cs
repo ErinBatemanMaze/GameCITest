@@ -7,6 +7,6 @@ public static class BuildScript {
         // This could include setting build flags, loading scenes, etc.
         
         // Perform the actual build
-        BuildPipeline.BuildPlayer(new string[] { }, "Builds/ScriptOnlyBuild", BuildTarget.StandaloneWindows64, BuildOptions.BuildScriptsOnly);
+        BuildPipeline.BuildPlayer(new string[] { }, "Builds/ScriptOnlyBuild", BuildTarget.Android, BuildOptions.BuildScriptsOnly);
     }
 }
