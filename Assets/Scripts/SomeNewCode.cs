@@ -13,6 +13,6 @@ public class SomeNewCode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Debg.Log("uh oh broken code..");
     }
 }
