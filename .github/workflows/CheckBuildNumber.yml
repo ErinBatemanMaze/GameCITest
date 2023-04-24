@@ -1,0 +1,19 @@
+#not finished yet
+
+name: Check Build Number
+on:
+  workflow_dispatch
+  
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Run PowerShell script
+      run: |
+        $buildnumberst = %build.number%
+        $buildvcsstring = %build.vcs.number%
+        $finalString = "$buildnumberst|$buildvcsstring"
+        $finalString | Out-File -FilePath ./BuildNumber/PeakyMainBuildNumber.txt
+      shell: powershell
