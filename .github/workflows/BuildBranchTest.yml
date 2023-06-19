@@ -27,3 +27,22 @@ on:
         required: false
 
 
+jobs:
+  call_build_apk_workflow:
+    runs-on:
+      labels: Ubuntu-8-32-300
+    
+    steps:
+    - name: Call Build APK Workflow
+      uses: EmergentEntertainment/infinite-inside-vr/.github/workflows/build.yml@main
+      with:
+        projectId: ${{ inputs.projectId }}
+        branch: ${{ inputs.branch }}
+        buildMethod: ${{ inputs.buildMethod }}
+        buildTarget: ${{ inputs.buildTarget }}
+        buildMethodParameters: ${{ inputs.buildMethodParameters }}
+      env:
+        UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+        UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
+        GITHUB_PRIVATE_TOKEN: ${{ secrets.GH_PRIVATE_TOKEN }}
