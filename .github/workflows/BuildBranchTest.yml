@@ -1,23 +1,28 @@
 name: Build from Branch
 
 on:
-  workflow_dispatch:
+  workflow_call:
     inputs:
       projectId:
+        type: string
         description: 'Consistent project ID to use for caching'
         required: true
       branch:
+        type: string
         description: 'Branch to check project out'
         required: true
         default: 'develop'
       buildMethod:
+        type: string
         description: 'Build method to call in the repository'
         required: false
       buildTarget:
+        type: string
         description: 'Build target'
         required: false
         default: 'Android'
       buildMethodParameters:
+        type: string
         description: 'Parameters to pass to the build method'
         required: false
 
