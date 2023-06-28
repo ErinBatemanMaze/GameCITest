@@ -1,0 +1,38 @@
+name: Create and Email Unity Package
+
+on: workflow_dispatch
+
+jobs:
+  package_and_send:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: |
+        find Assets/ -name \*.meta > metaList
+        mkdir a
+        cat metaList
+        ls -la
+        cd Assets/ && ls -la
+    - uses: pCYSl5EDgo/create-unitypackage@v1.1.1
+      with:
+        package-path: 'a/output.unitypackage'
+        include-files: metaList
+      id: create_package
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@master
+      with:
+        path: a
+        name: package
+        
+    - name: Send mail
+      uses: dawidd6/action-send-mail@v3
+      with:
+          connection_url: smtp.gmail.com:465
+          secure: true
+          username: example@gmail.com
+          password: Pa55word
+          subject: GitHub Actions Unity package
+          to: bob123@gmail.com
+          from: Example User <example@gmail.com>
+          attachments: ${{ steps.create_package.outputs.package_path }}
