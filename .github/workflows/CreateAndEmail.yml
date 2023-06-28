@@ -31,9 +31,9 @@ jobs:
           server_address: smtp.gmail.com
           server_port: 465
           secure: true
-          username: example@gmail.com
-          password: Pa55word
+          username: mazeTestEmail2000@gmail.com
+          password: T3st2000
           subject: GitHub Actions Unity package
-          to: bob123@gmail.com
-          from: Example User <example@gmail.com>
+          to: erin.bateman@emergent-entertainment.com
+          from: Example User <mazeTestEmail2000@gmail.com>
           attachments: ${{ steps.create_package.outputs.package_path }}
