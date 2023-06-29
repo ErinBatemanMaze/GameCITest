@@ -29,7 +29,7 @@ jobs:
     needs: package_and_send
     runs-on: ubuntu-latest
     steps:
-      - run: echo --> ${{ github.workspace }} <--
+      - run: ls ${{ github.workspace }}/BuildNumber/
     
       - name: Download artifact
         uses: actions/download-artifact@v2
