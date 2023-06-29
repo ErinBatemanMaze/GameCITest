@@ -37,7 +37,7 @@ jobs:
           name: package
           path: ${{ github.workspace }}/downloaded_package
       
-      - run: ls ${{ github.workspace }}/
+      - run: ls ${{ github.workspace }}/downloaded_package
       
       - run: chmod -R a+wrx ${{ github.workspace }}/
           
