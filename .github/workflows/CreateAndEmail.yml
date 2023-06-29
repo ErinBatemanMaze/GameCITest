@@ -29,6 +29,8 @@ jobs:
     needs: package_and_send
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+    
       - run: ls ${{ github.workspace }}/BuildNumber/
     
       - name: Download artifact
