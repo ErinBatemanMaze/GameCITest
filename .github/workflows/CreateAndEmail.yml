@@ -29,6 +29,8 @@ jobs:
     needs: package_and_send
     runs-on: ubuntu-latest
     steps:
+      - run: echo --> ${{ github.workspace }} <--
+    
       - name: Download artifact
         uses: actions/download-artifact@v2
         with:
