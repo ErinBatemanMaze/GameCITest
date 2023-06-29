@@ -31,13 +31,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
     
-      - run: ls ${{ github.workspace }}/BuildNumber/
-    
       - name: Download artifact
         uses: actions/download-artifact@v2
         with:
           name: package
-          path: downloaded_package
+          path: ${{ github.workspace }}/downloaded_package
+      
+      - run: ls ${{ github.workspace }}/
           
       - name: Send mail
         uses: dawidd6/action-send-mail@v3
@@ -51,4 +51,4 @@ jobs:
             to: erin.bateman@emergent-entertainment.com
             from: Shadow Build <mazeTestEmail2000@gmail.com>
             body: Shadow Branch Build job completed successfully!
-            attachments: ${{ github.workspace }}/BuildNumber/PeakyMainBuildNumber.txt
+            attachments: ${{ github.workspace }}/downloaded_package
