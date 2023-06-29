@@ -47,4 +47,4 @@ jobs:
             to: erin.bateman@emergent-entertainment.com
             from: Shadow Build <mazeTestEmail2000@gmail.com>
             body: Shadow Branch Build job completed successfully!
-            attachments: ${{ github.workspace }}/downloaded_package/a/output.unitypackage
+            attachments: ${{ github.workspace }}/BuildNumber/PeakyMainBuildNumber.txt
