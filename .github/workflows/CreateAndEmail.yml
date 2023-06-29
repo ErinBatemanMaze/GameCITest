@@ -25,15 +25,26 @@ jobs:
         path: a
         name: package
         
-    - name: Send mail
-      uses: dawidd6/action-send-mail@v3
-      with:
-          server_address: smtp.gmail.com
-          server_port: 465
-          secure: true
-          username: mazeTestEmail2000@gmail.com
-          password: zeuclyjtgymlfqde
-          subject: GitHub Actions Unity package
-          to: erin.bateman@emergent-entertainment.com
-          from: Example User <mazeTestEmail2000@gmail.com>
-          attachments: ${{ steps.create_package.outputs.package_path }}
+  send_email:
+    needs: package_and_send
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: package
+          path: downloaded_package
+          
+      - name: Send mail
+        uses: dawidd6/action-send-mail@v3
+        with:
+            server_address: smtp.gmail.com
+            server_port: 465
+            secure: true
+            username: mazeTestEmail2000@gmail.com
+            password: zeuclyjtgymlfqde
+            subject: GitHub Actions Unity package
+            to: erin.bateman@emergent-entertainment.com
+            from: Shadow Build <mazeTestEmail2000@gmail.com>
+            body: Shadow Branch Build job completed successfully!
+            attachments: ${{ github.workspace }}/downloaded_package/a/output.unitypackage
