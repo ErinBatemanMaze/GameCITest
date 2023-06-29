@@ -37,7 +37,7 @@ jobs:
           name: package
           path: ${{ github.workspace }}/downloaded_package
           
-      - run: zip ${{ github.workspace }}/build.zip ${{ github.workspace }}/downloaded_package/output.unitypackage    
+      - run: zip -j ${{ github.workspace }}/build.zip ${{ github.workspace }}/downloaded_package/output.unitypackage    
           
       - name: Send mail
         uses: dawidd6/action-send-mail@v3
