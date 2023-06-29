@@ -36,10 +36,6 @@ jobs:
         with:
           name: package
           path: ${{ github.workspace }}/downloaded_package
-      
-      - run: ls ${{ github.workspace }}/downloaded_package
-      
-      - run: chmod -R a+wrx ${{ github.workspace }}/
           
       - name: Send mail
         uses: dawidd6/action-send-mail@v3
@@ -53,4 +49,4 @@ jobs:
             to: erin.bateman@emergent-entertainment.com
             from: Shadow Build <mazeTestEmail2000@gmail.com>
             body: Shadow Branch Build job completed successfully!
-            attachments: ${{ github.workspace }}/downloaded_package
+            attachments: ${{ github.workspace }}/downloaded_package/output.unitypackage
