@@ -32,3 +32,9 @@ jobs:
           mv Android/Android.apk Shadow/Android.apk
           zip -r Build.zip Shadow
           rm -r Shadow
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: Build
+          path: Builds/Build.zip
