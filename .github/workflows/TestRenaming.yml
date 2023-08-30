@@ -23,8 +23,8 @@ jobs:
 
       - name: Create Shadow folder, move and rename OBB file
         run: |
-          mkdir -p Builds/Android/Shadow
-          mv Builds/Android/Android.main.obb Builds/Android/Shadow/main.1.com.mazetheory.shadow.obb
+          mkdir -p Builds/Android/com.mazetheory.shadow
+          mv Builds/Android/Android.main.obb Builds/Android/com.mazetheory.shadow/main.1.com.mazetheory.shadow.obb
 
       - name: Delete original OBB file
         run: rm Builds/Android/Android.main.obb.original
