@@ -21,15 +21,14 @@ jobs:
       - name: Show generated files
         run: ls -R Builds 
 
-      - name: Create Shadow folder and move files
+      - name: Create Shadow folder, move and rename OBB file
         run: |
-          mkdir -p Builds/Shadow
-          mv Builds/Android/Android.main.obb Builds/Shadow/main.1.com.mazetheory.shadow.obb
+          mkdir -p Builds/Android/Shadow
+          mv Builds/Android/Android.main.obb Builds/Android/Shadow/main.1.com.mazetheory.shadow.obb
 
       - name: Rename and zip files
         run: |
           cd Builds
-          mv Android/Android.apk Shadow/Android.apk
           zip -r Build.zip Shadow
           rm -r Shadow
 
