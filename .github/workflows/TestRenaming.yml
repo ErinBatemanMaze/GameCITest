@@ -29,8 +29,8 @@ jobs:
       - name: Rename and zip files
         run: |
           cd Builds
-          zip -r Build.zip Shadow
-          rm -r Shadow
+          zip -r Build.zip Android
+          rm -r Android
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v2
